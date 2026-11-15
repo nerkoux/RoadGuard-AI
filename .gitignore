@@ -1,0 +1,33 @@
+# --- environment ---
+.venv/
+__pycache__/
+*.pyc
+*.tmp
+
+# --- local tooling / personal documents (not part of the project code) ---
+.claude/
+reports_docx/
+ITS_Report_*.docx
+~$*
+
+# --- datasets: re-created by scripts/download_dataset.py + prepare_dataset.py ---
+data/raw/
+data/processed/
+data/potholes/images/
+data/potholes/labels/
+data/road_damage_multiclass/images/
+data/road_damage_multiclass/labels/
+*.cache
+
+# --- training artefacts: keep plots/CSVs, not checkpoints or machine-specific args ---
+outputs/runs/*/weights/
+outputs/runs/*/args.yaml
+outputs/*.txt
+
+# --- per-user runtime output ---
+outputs/detections/
+outputs/reports/
+outputs/detection_history.json
+
+# --- pretrained weights are downloaded automatically ---
+models/pretrained/*.pt

@@ -1,0 +1,203 @@
+{
+  "mode": "multiclass",
+  "classes": {
+    "0": "pothole",
+    "1": "longitudinal_crack",
+    "2": "transverse_crack",
+    "3": "alligator_crack",
+    "4": "road_patch"
+  },
+  "splits": {
+    "train": {
+      "images": 1990,
+      "with_objects": 1990,
+      "background": 0
+    },
+    "val": {
+      "images": 249,
+      "with_objects": 249,
+      "background": 0
+    },
+    "test": {
+      "images": 248,
+      "with_objects": 248,
+      "background": 0
+    }
+  },
+  "class_instances": {
+    "train": {
+      "pothole": 4086,
+      "transverse_crack": 171,
+      "alligator_crack": 384,
+      "longitudinal_crack": 383
+    },
+    "val": {
+      "pothole": 524,
+      "alligator_crack": 51,
+      "transverse_crack": 25,
+      "longitudinal_crack": 45
+    },
+    "test": {
+      "pothole": 550,
+      "alligator_crack": 49,
+      "longitudinal_crack": 47,
+      "transverse_crack": 20
+    }
+  },
+  "sources": {
+    "train": {
+      "rdd2022_Czech": 120,
+      "rdd2022_India": 360,
+      "rdd2022_Japan": 240,
+      "rdd2022_United_States": 152,
+      "roadeye": 1118
+    },
+    "val": {
+      "rdd2022_Czech": 15,
+      "rdd2022_India": 45,
+      "rdd2022_Japan": 30,
+      "rdd2022_United_States": 19,
+      "roadeye": 140
+    },
+    "test": {
+      "rdd2022_Czech": 15,
+      "rdd2022_India": 45,
+      "rdd2022_Japan": 30,
+      "rdd2022_United_States": 19,
+      "roadeye": 139
+    }
+  },
+  "generated": "2026-11-15 22:11:35",
+  "preprocessing": {
+    "images_found": 2487,
+    "corrupt_images": 0,
+    "missing_annotations": 0,
+    "invalid_boxes_removed": 0,
+    "unmapped_boxes_removed": 227,
+    "exact_duplicates_removed": 0,
+    "near_duplicate_groups": 11
+  },
+  "processed_images": 2487,
+  "verification": {
+    "counts": {
+      "train": 1990,
+      "val": 249,
+      "test": 248
+    },
+    "problems": [],
+    "ok": true
+  },
+  "raw_sources": [
+    {
+      "key": "rdd2022",
+      "name": "RDD2022 - Multi-national Road Damage Dataset (CRDDC 2022)",
+      "url": "https://github.com/sekilab/RoadDamageDetector  |  https://doi.org/10.6084/m9.figshare.21431547",
+      "license": "CC BY 4.0",
+      "citation": "Arya D. et al., 'RDD2022: A multi-national image dataset for automatic Road Damage Detection', Geoscience Data Journal, 2024. arXiv:2209.08538",
+      "format": "Pascal VOC XML (D00 longitudinal, D10 transverse, D20 alligator, D40 pothole, Repair)",
+      "status": "ok",
+      "images_downloaded": 1090,
+      "images_annotated": 1090,
+      "background_images": 0,
+      "label_instances": 3117,
+      "unannotated_skipped": 0,
+      "duplicates_skipped": 0,
+      "failed": 0,
+      "class_counts": {
+        "D00": 475,
+        "D20": 484,
+        "D40": 1715,
+        "D44": 81,
+        "D10": 216,
+        "D43": 8,
+        "D01": 7,
+        "D50": 128,
+        "D11": 3
+      },
+      "notes": [
+        "Official archive size: 13.3 GB - only selected files fetched",
+        "India: 7706 annotated train images (1530 with potholes) -> 450 selected",
+        "Japan: 10506 annotated train images (1390 with potholes) -> 300 selected",
+        "Czech: 2829 annotated train images (154 with potholes) -> 150 selected",
+        "United_States: 4805 annotated train images (116 with potholes) -> 190 selected"
+      ]
+    },
+    {
+      "key": "roboflow_pothole-detection-u53qg",
+      "name": "Roboflow Universe: pothole-detection-4wxdf/pothole-detection-u53qg",
+      "url": "https://universe.roboflow.com/pothole-detection-4wxdf/pothole-detection-u53qg",
+      "license": "See project page (Roboflow Universe projects are typically CC BY 4.0)",
+      "citation": "pothole-detection-4wxdf, 'pothole-detection-u53qg' dataset, Roboflow Universe.",
+      "format": "YOLOv8 export",
+      "status": "skipped",
+      "images_downloaded": 0,
+      "images_annotated": 0,
+      "background_images": 0,
+      "label_instances": 0,
+      "unannotated_skipped": 0,
+      "duplicates_skipped": 0,
+      "failed": 0,
+      "class_counts": {},
+      "notes": [
+        "Roboflow requires a free API key for programmatic downloads. Create one at https://app.roboflow.com/settings/api, then run:  set ROBOFLOW_API_KEY=<key>  (PowerShell: $env:ROBOFLOW_API_KEY='<key>') and re-run this script."
+      ]
+    },
+    {
+      "key": "roboflow_road-damage-detection-ezsli",
+      "name": "Roboflow Universe: yolo-csfsx/road-damage-detection-ezsli",
+      "url": "https://universe.roboflow.com/yolo-csfsx/road-damage-detection-ezsli",
+      "license": "See project page (Roboflow Universe projects are typically CC BY 4.0)",
+      "citation": "yolo-csfsx, 'road-damage-detection-ezsli' dataset, Roboflow Universe.",
+      "format": "YOLOv8 export",
+      "status": "skipped",
+      "images_downloaded": 0,
+      "images_annotated": 0,
+      "background_images": 0,
+      "label_instances": 0,
+      "unannotated_skipped": 0,
+      "duplicates_skipped": 0,
+      "failed": 0,
+      "class_counts": {},
+      "notes": [
+        "Roboflow requires a free API key for programmatic downloads. Create one at https://app.roboflow.com/settings/api, then run:  set ROBOFLOW_API_KEY=<key>  (PowerShell: $env:ROBOFLOW_API_KEY='<key>') and re-run this script."
+      ]
+    },
+    {
+      "key": "roadeye",
+      "name": "RoadEye Unified Pothole Dataset (Hugging Face)",
+      "url": "https://huggingface.co/datasets/AkumaDachi/RoadEye_Yolo_Aug",
+      "license": "Mixed / 'unknown' on HF card: aggregates Roboflow, Mendeley, Kaggle and CC-BY-4.0 sources (see individual source licences). Used here for non-commercial academic purposes only.",
+      "citation": "AkumaDachi, RoadEye_Yolo_Aug, Hugging Face Datasets, 2026.",
+      "format": "YOLO txt (class 0 = pothole)",
+      "status": "ok",
+      "images_downloaded": 1397,
+      "images_annotated": 1397,
+      "background_images": 0,
+      "label_instances": 3445,
+      "unannotated_skipped": 0,
+      "duplicates_skipped": 3,
+      "failed": 0,
+      "class_counts": {
+        "pothole": 3445
+      },
+      "notes": [
+        "Could not list split 'test': HF listing failed (404) for RoadEyeUnified_SingleClass_Aug/images/test",
+        "sub-source 'kg': 600 available, 180 selected",
+        "sub-source 'mwpd': 2782 available, 833 selected",
+        "sub-source 'rf': 1295 available, 388 selected"
+      ]
+    }
+  ],
+  "raw_totals": {
+    "images_downloaded": 2487,
+    "images_annotated": 2487,
+    "background_images": 0,
+    "label_instances": 6562
+  },
+  "max_side": 640,
+  "split_ratio": [
+    0.8,
+    0.1,
+    0.1
+  ]
+}

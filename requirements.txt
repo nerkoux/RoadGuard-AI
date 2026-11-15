@@ -1,0 +1,16 @@
+# RoadGuard AI - runtime dependencies
+# NOTE: for NVIDIA GPU training install a CUDA build of torch first, e.g.
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cu128
+ultralytics>=8.3.0        # YOLOv8 training / inference
+torch>=2.1                # deep learning framework (CPU or CUDA build)
+torchvision>=0.16
+opencv-python>=4.8        # image I/O, drawing, webcam capture
+numpy>=1.24
+pillow>=10.0
+pyyaml>=6.0
+requests>=2.31            # dataset downloads
+streamlit>=1.35           # dashboard
+plotly>=5.18              # interactive charts
+pandas>=2.0
+matplotlib>=3.7
+reportlab>=4.0            # optional PDF report export

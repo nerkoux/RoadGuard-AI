@@ -1,0 +1,15 @@
+{
+  "predicted": {
+    "GOOD": 111,
+    "MODERATE": 51,
+    "SEVERE": 86
+  },
+  "ground_truth": {
+    "MODERATE": 99,
+    "SEVERE": 147,
+    "GOOD": 2
+  },
+  "agreement": 0.4758,
+  "images": 248,
+  "weights": "models/trained/roadguard_pothole_best.pt"
+}

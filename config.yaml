@@ -1,0 +1,107 @@
+# =====================================================================
+#  RoadGuard AI - central configuration
+#  All paths are relative to the project root.
+# =====================================================================
+
+project:
+  name: "ROADGUARD AI"
+  tagline: "Making Every Road Safer Through Artificial Intelligence."
+
+paths:
+  raw_dir: data/raw
+  processed_dir: data/processed
+  dataset_dir: data/potholes            # final YOLO dataset (images/labels/data.yaml)
+  multiclass_dataset_dir: data/road_damage_multiclass
+  samples_dir: data/samples
+  pretrained_dir: models/pretrained
+  trained_dir: models/trained
+  detections_dir: outputs/detections
+  reports_dir: outputs/reports
+  history_file: outputs/detection_history.json
+  runs_dir: outputs/runs                # Ultralytics training runs
+
+# Unified label schema. Every source dataset is normalised into this.
+classes:
+  pothole: {0: pothole}
+  multiclass:
+    0: pothole
+    1: longitudinal_crack
+    2: transverse_crack
+    3: alligator_crack
+    4: road_patch
+
+# ---------------------------------------------------------------------
+# Dataset acquisition (scripts/download_dataset.py)
+# ---------------------------------------------------------------------
+download:
+  workers: 8
+  timeout_s: 60
+  retries: 3
+  # Hugging Face RoadEye (YOLO format, pothole only). Only original
+  # (non "_aug") images are taken so augmented copies of the same photo
+  # never leak across train/val/test.
+  roadeye:
+    enabled: true
+    max_images: 1400
+  # RDD2022 (Pascal VOC XML, multi-class). Images are range-fetched from
+  # the official 13 GB Figshare archive so the full archive is never
+  # stored on disk. Values = maximum images taken per country.
+  rdd2022:
+    enabled: true
+    countries:
+      India: 450
+      Japan: 300
+      Czech: 150
+      United_States: 200
+  # Roboflow Universe needs a (free) API key: set ROBOFLOW_API_KEY.
+  roboflow:
+    enabled: true
+    projects:
+      - {workspace: pothole-detection-4wxdf, project: pothole-detection-u53qg, version: 1}
+      - {workspace: yolo-csfsx, project: road-damage-detection-ezsli, version: null}
+
+# ---------------------------------------------------------------------
+# Pre-processing (scripts/prepare_dataset.py)
+# ---------------------------------------------------------------------
+dataset:
+  split: [0.8, 0.1, 0.1]       # train / val / test
+  seed: 42
+  max_side: 640                # longest image side after resizing
+  min_box_norm: 0.004          # drop boxes thinner than this (normalised)
+  background_fraction: 0.10    # max share of images with no target object
+  samples_per_split: 12        # demo images copied to data/samples
+
+# ---------------------------------------------------------------------
+# Training (scripts/train.py) - CLI flags override these values
+# ---------------------------------------------------------------------
+training:
+  model: yolov8n.pt
+  imgsz: 640
+  epochs: 10
+  batch: auto                  # auto -> picked from GPU memory / CPU
+  workers: auto
+  patience: 5                  # early stopping
+  cpu_imgsz: 512               # smaller input on CPU-only machines
+  cpu_fraction: 1.0            # fraction of train set used on CPU
+
+# ---------------------------------------------------------------------
+# Inference defaults (UI sliders start here)
+# ---------------------------------------------------------------------
+inference:
+  conf: 0.25
+  iou: 0.45
+  imgsz: 640
+  max_det: 100
+
+# ---------------------------------------------------------------------
+# Severity engine (src/severity.py) - indicative, NOT an engineering
+# certification. Percentages are of total image area.
+# ---------------------------------------------------------------------
+severity:
+  min_confidence: 0.25          # detections below this are ignored
+  moderate_min_potholes: 1
+  severe_min_potholes: 3
+  moderate_area_pct: 1.0        # any damage covering >= 1 % -> at least MODERATE
+  severe_area_pct: 8.0          # combined damage >= 8 % -> SEVERE
+  severe_single_pothole_pct: 5.0  # one big pothole (>=5 %) with high confidence -> SEVERE
+  high_confidence: 0.60
